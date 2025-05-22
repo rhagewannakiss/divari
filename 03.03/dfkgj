@@ -1,0 +1,47 @@
+%include "st_io.inc"
+
+section .data
+    a db -120
+    b db -107
+    c db 133
+    d dw -257
+
+section .bss
+    sum_ab resw 1
+    sum_cd resw 1
+
+section .text
+    global _start
+
+_start:
+    movsx ax, byte [a]
+    movsx bx, byte [b]
+    add ax, bx
+    mov [sum_ab], ax
+
+    mov al, [a]
+    cbw
+    imul ax, 10
+    cwd
+    idiv word [sum_ab]
+
+    movsx esi, ax
+
+    movsx ax, byte [d]
+    movsx bx, byte [c]
+    add ax, bx
+    mov word [sum_cd], ax
+
+    mov al, [b]
+    cbw
+    imul ax, 10
+    cwd
+    idiv word [sum_cd]
+    add esi, eax
+
+    PRINT "z is "
+    mov eax, esi
+    SIGNINT eax
+    PUTCHAR 10
+
+    FINISH

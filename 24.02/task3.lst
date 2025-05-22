@@ -1,0 +1,51 @@
+     1                                  section .data
+     2 00000000 0A                          nwln db 10
+     3 00000001 4D495054                    st db 'MIPT'
+     4                                  section .text
+     5                                      global _start
+     6                                  _start:
+     7 00000000 B804000000                  mov eax, 4
+     8 00000005 BB01000000                  mov ebx, 1
+     9 0000000A B9[01000000]                mov ecx, st
+    10 0000000F BA01000000                  mov edx, 1
+    11 00000014 CD80                        int 0x80
+    12
+    13 00000016 B804000000                  mov eax, 4
+    14 0000001B BB01000000                  mov ebx, 1
+    15 00000020 BA01000000                  mov edx, 1
+    16 00000025 B9[00000000]                mov ecx, nwln
+    17 0000002A CD80                        int 0x80
+    18
+    19 0000002C B804000000                  mov eax, 4
+    20 00000031 BB01000000                  mov ebx, 1
+    21 00000036 BA01000000                  mov edx, 1
+    22 0000003B B9[02000000]                mov ecx, st+1
+    23 00000040 CD80                        int 0x80
+    24
+    25 00000042 B804000000                  mov eax, 4
+    26 00000047 BB01000000                  mov ebx, 1
+    27 0000004C BA01000000                  mov edx, 1
+    28 00000051 B9[00000000]                mov ecx, nwln
+    29 00000056 CD80                        int 0x80
+    30
+    31 00000058 B804000000                  mov eax, 4
+    32 0000005D BB01000000                  mov ebx, 1
+    33 00000062 BA01000000                  mov edx, 1
+    34 00000067 B9[03000000]                mov ecx, st+2
+    35 0000006C CD80                        int 0x80
+    36
+    37 0000006E B804000000                  mov eax, 4
+    38 00000073 BB01000000                  mov ebx, 1
+    39 00000078 BA01000000                  mov edx, 1
+    40 0000007D B9[00000000]                mov ecx, nwln
+    41 00000082 CD80                        int 0x80
+    42
+    43 00000084 B804000000                  mov eax, 4
+    44 00000089 BB01000000                  mov ebx, 1
+    45 0000008E BA01000000                  mov edx, 1
+    46 00000093 B9[04000000]                mov ecx, st+3
+    47 00000098 CD80                        int 0x80
+    48
+    49 0000009A B801000000                  mov eax, 1
+    50 0000009F 31DB                        xor ebx, ebx
+    51 000000A1 CD80                        int 0x80

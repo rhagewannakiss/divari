@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "char_stack.h"
+
+struct Node *push(struct Node *top, char a) {
+    struct Node *new_top = (struct Node *) calloc(1, sizeof(struct Node));
+
+    new_top->next = top;
+    new_top->elem = a;
+
+    return new_top;
+}
+
+struct Node *pop(struct Node *top, char *a) {
+    struct Node *new_top = NULL;
+
+    if (!isempty(top))
+    {
+        *a = top->elem;
+        new_top = top->next;
+        free(top);
+    }
+
+    return new_top;
+}
+
+bool isempty(struct Node *top) {
+    return top == NULL;
+}

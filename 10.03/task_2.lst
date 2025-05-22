@@ -1,0 +1,15 @@
+     1                                  section .text
+     2                                      global _start
+     3
+     4                                  _start:
+     5 00000000 B8[13000000]                mov eax, l
+     6 00000005 FFE0                        jmp eax
+     7                                  m:
+     8 00000007 B801000000                  mov eax, 1
+     9 0000000C BB00000000                  mov ebx, 0
+    10 00000011 CD80                        int 0x80
+    11
+    12                                  l:
+    13 00000013 EBF2                        jmp m      ;12 байт
+    14
+    15

@@ -1,0 +1,42 @@
+%include "st_io.inc"
+
+section .bss
+    x resb 1
+    y resb 1
+    date resw 1  ; 16-битное число для ввода
+
+section .text
+    global _start
+
+_start:
+    PRINT "Введите результат: "
+    GETUN word [date]  ; Считываем 16-битное число
+    PUTCHAR 10
+
+    ; Вычисляем Y
+    mov ax, [date]
+    mov bx, 12
+    xor dx, dx
+    div bx             ; AX = частное, DX = остаток (R)
+
+    mov [y], dl        ; DL = остаток (0-11)
+    cmp byte [y], 0
+    jne .set_y
+    mov byte [y], 12   ; Если R=0 → Y=12
+
+.set_y:
+    ; Вычисляем X
+    mov ax, [date]
+    sub ax, [y]        ; AX = date - Y
+    xor dx, dx
+    div bx             ; AX = X = (date - Y) / 12
+    mov [x], al        ; AL = X (0-31)
+
+    ; Вывод результата
+    PRINT "Дата: "
+    UNSINT [x]
+    PRINT ":"
+    UNSINT [y]
+    PUTCHAR 10
+
+    FINISH
